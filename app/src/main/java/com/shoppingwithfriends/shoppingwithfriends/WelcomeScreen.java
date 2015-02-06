@@ -20,5 +20,5 @@ public class WelcomeScreen extends ActionBarActivity {
         startActivity(intent);
     }
 
-
+    
 }
