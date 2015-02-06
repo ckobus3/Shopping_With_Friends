@@ -21,6 +21,10 @@
             android:name=".WelcomeScreen"
             android:label="@string/title_activity_welcome_screen" >
         </activity>
+        <activity
+            android:name=".UserRegistration"
+            android:label="@string/title_activity_user_registration" >
+        </activity>
     </application>
 
 </manifest>

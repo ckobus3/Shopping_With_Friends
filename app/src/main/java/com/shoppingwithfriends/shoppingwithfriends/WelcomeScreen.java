@@ -20,4 +20,10 @@ public class WelcomeScreen extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void gotoRegistration(View view) {
+        Intent intent = new Intent(this, UserRegistration.class);
+        startActivity(intent);
+    }
+
+    
 }
