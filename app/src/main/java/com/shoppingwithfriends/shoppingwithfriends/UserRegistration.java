@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,6 +19,10 @@ public class UserRegistration extends Activity {
     private EditText passText;
     public static HashMap<String, String> reg;
 
+    /**
+     * Sets content, creates new HashMap if one doesn't exist
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +36,30 @@ public class UserRegistration extends Activity {
         passText = (EditText)findViewById(R.id.editText3);
     }
 
+    /**
+     * Registers the user
+     * @param view the registration view
+     */
     public void register(View view) {
         String name = nameText.getText().toString();
         String un = unText.getText().toString();
         String pass = passText.getText().toString();
-        Intent intent = new Intent(this, WelcomeScreen.class);
-        reg.put(un, pass);
-        startActivity(intent);
+        if (reg.containsKey(un)) {
+            EditText mUsernameView = (EditText) findViewById(R.id.editText2);
+            mUsernameView.setError("This username is already taken.");
+            mUsernameView.requestFocus();
+
+        } else {
+            reg.put(un, pass);
+            Intent intent = new Intent(this, WelcomeScreen.class);
+            startActivity(intent);
+        }
     }
 
+    /**
+     * Returns to the Welcome Screen if user decides to cancel registration
+     * @param view the registration view
+     */
     public void gotoWelcomeScreen(View view) {
         Intent intent = new Intent(this, WelcomeScreen.class);
         startActivity(intent);

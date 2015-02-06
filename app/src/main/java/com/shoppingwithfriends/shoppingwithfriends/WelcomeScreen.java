@@ -15,11 +15,20 @@ public class WelcomeScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
     }
+
+    /**
+     * Returns to Login view upon cancel
+     * @param view
+     */
     public void gotoLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Goes to UserRegistration screen
+     * @param view
+     */
     public void gotoRegistration(View view) {
         Intent intent = new Intent(this, UserRegistration.class);
         startActivity(intent);
