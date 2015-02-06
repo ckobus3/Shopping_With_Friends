@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -155,7 +156,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return UserRegistration.reg != null && UserRegistration.reg.get(mEmailView.getText().toString()).equals(password);
+        String un = mEmailView.getText().toString();
+        Log.d("abc", (UserRegistration.reg == null) + "");
+        return UserRegistration.reg != null && UserRegistration.reg.containsKey(un) &&
+                UserRegistration.reg.get(un).equals(password);
     }
 
     /**

@@ -23,19 +23,25 @@ public class UserRegistration extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
-        reg = new HashMap<>();
+        if (reg == null)
+            reg = new HashMap<>();
         button = (Button)findViewById(R.id.button);
         nameText = (EditText)findViewById(R.id.editText);
         unText = (EditText)findViewById(R.id.editText2);
         passText = (EditText)findViewById(R.id.editText3);
     }
 
-    public void gotoWelcomeScreen(View view) {
+    public void register(View view) {
         String name = nameText.getText().toString();
         String un = unText.getText().toString();
         String pass = passText.getText().toString();
         Intent intent = new Intent(this, WelcomeScreen.class);
         reg.put(un, pass);
+        startActivity(intent);
+    }
+
+    public void gotoWelcomeScreen(View view) {
+        Intent intent = new Intent(this, WelcomeScreen.class);
         startActivity(intent);
     }
 
