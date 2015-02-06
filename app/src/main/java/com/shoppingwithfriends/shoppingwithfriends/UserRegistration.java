@@ -1,45 +1,42 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.HashMap;
 
 
-public class UserRegistration extends ActionBarActivity {
+public class UserRegistration extends Activity {
+
+    private Button button;
+    private EditText nameText;
+    private EditText unText;
+    private EditText passText;
+    public static HashMap<String, String> reg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
+
+        reg = new HashMap<>();
+        button = (Button)findViewById(R.id.button);
+        nameText = (EditText)findViewById(R.id.editText);
+        unText = (EditText)findViewById(R.id.editText2);
+        passText = (EditText)findViewById(R.id.editText3);
     }
 
     public void gotoWelcomeScreen(View view) {
+        String name = nameText.getText().toString();
+        String un = unText.getText().toString();
+        String pass = passText.getText().toString();
         Intent intent = new Intent(this, WelcomeScreen.class);
+        reg.put(un, pass);
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_registeration, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

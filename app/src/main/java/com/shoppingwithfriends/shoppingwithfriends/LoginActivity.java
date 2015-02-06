@@ -148,14 +148,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
     }
 
-    private boolean isEmailValid(String email) {
+    private boolean isEmailValid(String un) {
         //TODO: Replace this with your own logic
-        return email.equals("user");
+        return UserRegistration.reg != null && UserRegistration.reg.containsKey(un);
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.equals("pass");
+        return UserRegistration.reg != null && UserRegistration.reg.get(mEmailView.getText().toString()).equals(password);
     }
 
     /**
