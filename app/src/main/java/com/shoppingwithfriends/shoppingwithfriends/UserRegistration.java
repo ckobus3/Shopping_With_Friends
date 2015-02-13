@@ -7,16 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.HashMap;
-
-
 public class UserRegistration extends Activity {
 
     private Button button;
     private EditText nameText;
     private EditText unText;
     private EditText passText;
-    public static HashMap<String, String> reg;
 
     /**
      * Sets content, creates new HashMap if one doesn't exist
@@ -26,8 +22,6 @@ public class UserRegistration extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
-        if (reg == null)
-            reg = new HashMap<>();
         button = (Button)findViewById(R.id.button);
         nameText = (EditText)findViewById(R.id.editText);
         unText = (EditText)findViewById(R.id.editText2);
@@ -39,16 +33,20 @@ public class UserRegistration extends Activity {
      * @param view the registration view
      */
     public void register(View view) {
-        String name = nameText.getText().toString();
+        DatabaseHandler db = new DatabaseHandler(this);
+        String name;
+        if (nameText.getText() == null)
+            name = "";
+        else
+            name = nameText.getText().toString();
         String un = unText.getText().toString();
         String pass = passText.getText().toString();
-        if (reg.containsKey(un)) {
-            EditText mUsernameView = (EditText) findViewById(R.id.editText2);
-            mUsernameView.setError("This username is already taken.");
+        EditText mUsernameView = (EditText) findViewById(R.id.editText2);
+        if (db.checkUser(un)) {
+            mUsernameView.setError("Username already exists");
             mUsernameView.requestFocus();
-
         } else {
-            reg.put(un, pass);
+            db.addUser(new User(name, un, pass));
             Intent intent = new Intent(this, WelcomeScreen.class);
             startActivity(intent);
         }
