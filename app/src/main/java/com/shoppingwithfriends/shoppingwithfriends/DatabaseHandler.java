@@ -251,16 +251,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         int id = user.getId();
 
         List<User> friendList = new ArrayList<>();
-        // Select All Query
+        // select friends of a user from table
         String friendQuery = "SELECT  * FROM " + TABLE_FRIENDS + " WHERE "
                 + KEY_BASE + " = \'" + id + "\'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(friendQuery, null);
 
-        // looping through all rows and adding to list
+        // looping through all rows of friends
         if (cursor.moveToFirst()) {
             do {
+                //get each friend from the user table
                 String friendId = (cursor.getString(2));
                 String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE "
                         + KEY_ID + " = " + friendId;
@@ -268,18 +269,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 SQLiteDatabase userDb = this.getWritableDatabase();
                 Cursor userCursor = userDb.rawQuery(selectQuery, null);
 
+                //add friend to list
                 if (userCursor.moveToFirst()) {
                     User friend = new User();
 
-                    friend.setId(Integer.parseInt(cursor.getString(0)));
-                    friend.setName(cursor.getString(1));
-                    friend.setUsername(cursor.getString(2));
-                    friend.setPassword(cursor.getString(3));
-                    friend.setEmail(cursor.getString(4));
-                    friend.setRating(Integer.parseInt(cursor.getString(5)));
-                    friend.setNumReports(Integer.parseInt(cursor.getString(6)));
-                    friend.setIsLocked(Integer.parseInt(cursor.getString(7)) == 1);
-                    friend.setIsAdmin(Integer.parseInt(cursor.getString(8))==1);
+                    friend.setId(Integer.parseInt(userCursor.getString(0)));
+                    friend.setName(userCursor.getString(1));
+                    friend.setUsername(userCursor.getString(2));
+                    friend.setPassword(userCursor.getString(3));
+                    friend.setEmail(userCursor.getString(4));
+                    friend.setRating(Integer.parseInt(userCursor.getString(5)));
+                    friend.setNumReports(Integer.parseInt(userCursor.getString(6)));
+                    friend.setIsLocked(Integer.parseInt(userCursor.getString(7)) == 1);
+                    friend.setIsAdmin(Integer.parseInt(userCursor.getString(8))==1);
 
                     // Adding friend to list
                     friendList.add(friend);
