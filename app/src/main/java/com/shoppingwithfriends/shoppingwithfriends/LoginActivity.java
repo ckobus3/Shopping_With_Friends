@@ -81,6 +81,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Intent intent = new Intent(this, WelcomeScreen.class);
         startActivity(intent);
     }
+
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
     }
@@ -136,6 +137,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            Intent intent = new Intent(this, LoggedIn.class);
+            startActivity(intent);
         }
     }
 
@@ -285,6 +288,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 finish();
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
