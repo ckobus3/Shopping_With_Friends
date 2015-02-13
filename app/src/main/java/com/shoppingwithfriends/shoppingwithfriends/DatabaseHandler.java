@@ -43,7 +43,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creating Tables
+    /**
+     * Creates databases with two tables
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
@@ -58,7 +61,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_FRIENDS_TABLE);
     }
 
-    // Upgrading database
+    /**
+     * upgrades database
+     * @param db db to be upgraded
+     * @param oldVersion old version
+     * @param newVersion new version
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
@@ -73,7 +81,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    // Adding new user
+    /**
+     * Add user to the database
+     * @param user user to be added
+     */
     void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -92,8 +103,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting single contact
-    User getUser(int id) {
+    /**
+     * returns user from id
+     * @param id
+     * @return user
+     */
+    public User getUser(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
@@ -109,7 +124,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)));
     }
 
-    // Getting All Users
+    /**
+     * return a list of all users
+     * @return list of all users
+     */
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         // Select All Query
@@ -132,15 +150,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 user.setIsLocked(Integer.parseInt(cursor.getString(7)) == 1);
                 user.setIsAdmin(Integer.parseInt(cursor.getString(8))==1);
 
-                // Adding contact to list
+                // Adding user to list
                 userList.add(user);
             } while (cursor.moveToNext());
         }
-        // return contact list
+        // return user list
         return userList;
     }
 
-    // Updating single contact
+    /**
+     * updates a given user in the database
+     * @param user user to be updated
+     * @return number of rows affected
+     */
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -159,7 +181,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(user.getId()) });
     }
 
-    // Deleting single contact
+    /**
+     * deleted a single user
+     * @param user user to be deleted
+     */
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?",
@@ -168,7 +193,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    // Getting contacts Count
+    /**
+     * gets count of users
+     * @return number of users
+     */
     public int getUsersCount() {
         String countQuery = "SELECT  * FROM " + TABLE_USERS;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -179,6 +207,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    /**
+     * checks the username is in the db
+     * @param username username to be checked
+     * @return true if its in the system
+     */
     public boolean checkUser(String username) {
         String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + KEY_UN + " = \'"
                 + username + "\'";
@@ -191,6 +224,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Begin Friend table methods
 
+    /**
+     * adds a friend to the friend table
+     * @param base user with a friend
+     * @param friend new friend of the user
+     */
     void addFriend(User base, User friend) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -203,7 +241,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting All Friends
+    /**
+     * returns all friends of a user
+     * @param user user to get friends of
+     * @return list of friends of user
+     */
     public List<User> getAllFriends(User user) {
 
         int id = user.getId();
@@ -251,11 +293,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return friendList;
     }
 
-    // Deleting single friend
-    public void deleteFriend(User user) {
+    /**
+     * deleted a row from the friend database
+     * @param user user to be deleted
+     * @param friend friend to be deleted
+     */
+    public void deleteFriend(User user, User friend) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_FRIENDS, KEY_BASE + " = ?",
-                new String[] { String.valueOf(user.getId()) });
+        db.delete(TABLE_FRIENDS, KEY_BASE + " = ? AND " + KEY_FRIEND + " = ?",
+                new String[] { String.valueOf(user.getId()), String.valueOf(friend.getId()) });
         db.close();
     }
 
