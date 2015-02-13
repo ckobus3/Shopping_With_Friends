@@ -5,14 +5,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -76,6 +74,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        /**
+         * CRUD Operations
+         * */
+        // Inserting Contacts
+        Log.d("Insert: ", "Inserting ..");
+        db.addUser(new User("Ravi", "ab", "pw", "asdf@aol.com"));
+        db.addUser(new User("Billy", "cd", "pw", "fda@aol.com"));
+        db.addUser(new User("Tommy", "ef", "pw", "aasda@gmail.com"));
+        db.addUser(new User("Susan", "gh", "pw", "skiwq@hotmail.com"));
+
+        // Reading all contacts
+        Log.d("Reading: ", "Reading all contacts..");
+        List<User> users = db.getAllUsers();
+
+        for (User cn : users) {
+            String log = "Id: "+cn.getId()+" ,Name: " + cn.getName() + " ,Phone: " + cn.getEmail();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
     }
     public void gotoWelcomeScreen(View view) {
         Intent intent = new Intent(this, WelcomeScreen.class);
