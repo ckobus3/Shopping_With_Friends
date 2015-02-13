@@ -37,7 +37,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_UN + " TEXT" + KEY_EMAIL + " TEXT" + KEY_PW + " TEXT" + ")";
+                + KEY_UN + " TEXT," + KEY_EMAIL + " TEXT," + KEY_PW + " TEXT" + ")";
         db.execSQL(CREATE_USERS_TABLE);
     }
 
