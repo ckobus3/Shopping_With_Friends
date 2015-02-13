@@ -140,8 +140,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            Intent intent = new Intent(this, LoggedIn.class);
-            startActivity(intent);
         }
     }
 
@@ -276,10 +274,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
             if (success) {
                 finish();
-
+                Intent intent = new Intent(LoginActivity.this, LoggedIn.class);
+                startActivity(intent);
             } else {
                 mPasswordView.setError("Incorrect credentials");
                 mPasswordView.requestFocus();
