@@ -65,6 +65,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
+        DatabaseHandler db = new DatabaseHandler(this);
+        users = db.getAllUsers();
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -72,8 +75,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 attemptLogin();
             }
         });
-        DatabaseHandler db = new DatabaseHandler(this);
-        users = db.getAllUsers();
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -249,8 +250,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         private final String mUsername;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
-            mUsername = email;
+        UserLoginTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
@@ -277,7 +278,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError("Incorrect credentials");
                 mPasswordView.requestFocus();
             }
         }

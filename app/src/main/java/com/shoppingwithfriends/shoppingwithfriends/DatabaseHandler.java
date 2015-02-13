@@ -20,9 +20,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Contacts table name
     private static final String TABLE_USERS = "users";
+    private static final String TABLE_FRIENDS = "friends";
 
-    // Contacts Table Columns names
+    // common column names
     private static final String KEY_ID = "id";
+
+    // users Table Columns names
     private static final String KEY_NAME = "name";
     private static final String KEY_UN = "username";
     private static final String KEY_EMAIL = "email";
@@ -31,6 +34,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_RATE = "rating";
     private static final String KEY_ADMIN = "isAdmin";
     private static final String KEY_LOCK = "isLocked";
+
+    // friends table column names
+    private static final String KEY_BASE = "base";
+    private static final String KEY_FRIEND = "friend";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,10 +48,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_UN + " TEXT," + KEY_EMAIL + " TEXT," + KEY_PW + " TEXT,"
+                + KEY_UN + " TEXT," + KEY_PW + " TEXT," + KEY_EMAIL + " TEXT,"
                 + KEY_RATE + " INTEGER," + KEY_NUM_REP + " INTEGER," + KEY_ADMIN + " BOOLEAN,"
                 + KEY_LOCK + " BOOLEAN" + ")";
+        String CREATE_FRIENDS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_BASE + " TEXT,"
+                + KEY_FRIEND + " TEXT" + ")";
         db.execSQL(CREATE_USERS_TABLE);
+        db.execSQL(CREATE_FRIENDS_TABLE);
     }
 
     // Upgrading database
@@ -52,6 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
 
         // Create tables again
         onCreate(db);
@@ -61,15 +73,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    // Adding new contact
+    // Adding new user
     void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, user.getName()); // Contact Name
-        values.put(KEY_EMAIL, ""); // Contact email
-        values.put(KEY_PW, user.getPassword()); // Contact pw
-        values.put(KEY_UN, user.getUsername()); // Contact username
+        values.put(KEY_NAME, user.getName()); // user Name
+        values.put(KEY_UN, user.getUsername()); // user username
+        values.put(KEY_PW, user.getPassword()); // user pw
+        values.put(KEY_EMAIL, ""); // user email
         values.put(KEY_RATE, 0);
         values.put(KEY_NUM_REP, 0);
         values.put(KEY_ADMIN, 0);
@@ -135,11 +147,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, user.getName()); // Contact Name
-        values.put(KEY_EMAIL, user.getEmail()); // Contact email
-        values.put(KEY_PW, user.getPassword()); // Contact pw
         values.put(KEY_UN, user.getUsername()); // Contact username
-        values.put(KEY_NUM_REP, user.getNumReports());
+        values.put(KEY_PW, user.getPassword()); // Contact pw
+        values.put(KEY_EMAIL, user.getEmail()); // Contact email
         values.put(KEY_RATE, user.getRating());
+        values.put(KEY_NUM_REP, user.getNumReports());
         values.put(KEY_ADMIN, user.getIsAdmin());
         values.put(KEY_LOCK, user.getIsLocked());
 
@@ -169,7 +181,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public boolean checkUser(String username) {
-        String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + KEY_UN + "=" + username;
+        String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + KEY_UN + " = \'"
+                + username + "\'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         boolean exists = cursor.moveToFirst();
