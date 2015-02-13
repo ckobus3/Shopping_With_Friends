@@ -51,9 +51,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_UN + " TEXT," + KEY_PW + " TEXT," + KEY_EMAIL + " TEXT,"
                 + KEY_RATE + " INTEGER," + KEY_NUM_REP + " INTEGER," + KEY_ADMIN + " BOOLEAN,"
                 + KEY_LOCK + " BOOLEAN" + ")";
-        String CREATE_FRIENDS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_BASE + " TEXT,"
-                + KEY_FRIEND + " TEXT" + ")";
+        String CREATE_FRIENDS_TABLE = "CREATE TABLE " + TABLE_FRIENDS + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_BASE + " INTEGER,"
+                + KEY_FRIEND + " INTEGER" + ")";
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_FRIENDS_TABLE);
     }
@@ -111,7 +111,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Users
     public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<User>();
+        List<User> userList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_USERS;
 
@@ -136,7 +136,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 userList.add(user);
             } while (cursor.moveToNext());
         }
-
         // return contact list
         return userList;
     }
@@ -188,6 +187,76 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         boolean exists = cursor.moveToFirst();
         cursor.close();
         return exists;
+    }
+
+    //Begin Friend table methods
+
+    void addFriend(User base, User friend) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_BASE, base.getId()); // user Name
+        values.put(KEY_FRIEND, friend.getId()); // user username
+
+        // Inserting Row
+        db.insert(TABLE_FRIENDS, null, values);
+        db.close(); // Closing database connection
+    }
+
+    // Getting All Friends
+    public List<User> getAllFriends(User user) {
+
+        int id = user.getId();
+
+        List<User> friendList = new ArrayList<>();
+        // Select All Query
+        String friendQuery = "SELECT  * FROM " + TABLE_FRIENDS + " WHERE "
+                + KEY_BASE + " = \'" + id + "\'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(friendQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                String friendId = (cursor.getString(2));
+                String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE "
+                        + KEY_ID + " = " + friendId;
+
+                SQLiteDatabase userDb = this.getWritableDatabase();
+                Cursor userCursor = userDb.rawQuery(selectQuery, null);
+
+                if (userCursor.moveToFirst()) {
+                    User friend = new User();
+
+                    friend.setId(Integer.parseInt(cursor.getString(0)));
+                    friend.setName(cursor.getString(1));
+                    friend.setUsername(cursor.getString(2));
+                    friend.setPassword(cursor.getString(3));
+                    friend.setEmail(cursor.getString(4));
+                    friend.setRating(Integer.parseInt(cursor.getString(5)));
+                    friend.setNumReports(Integer.parseInt(cursor.getString(6)));
+                    friend.setIsLocked(Integer.parseInt(cursor.getString(7)) == 1);
+                    friend.setIsAdmin(Integer.parseInt(cursor.getString(8))==1);
+
+                    // Adding friend to list
+                    friendList.add(friend);
+                }
+                userCursor.close();
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return friend list
+        return friendList;
+    }
+
+    // Deleting single friend
+    public void deleteFriend(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_FRIENDS, KEY_BASE + " = ?",
+                new String[] { String.valueOf(user.getId()) });
+        db.close();
     }
 
 }

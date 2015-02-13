@@ -12,6 +12,8 @@ public class User {
     private boolean isLocked;
     private boolean isAdmin;
 
+    public static User currentUser;
+
     public User() {
     }
 

@@ -263,7 +263,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 String pass = user.getPassword();
                 if (un.equals(mUsername)) {
                     // Account exists, return true if the password matches.
-                    return pass.equals(mPassword);
+                    if (pass.equals(mPassword)) {
+                        User.currentUser = user;
+                        return true;
+                    } else
+                        return false;
                 }
             }
             // TODO: register the new account here.
