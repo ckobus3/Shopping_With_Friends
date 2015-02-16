@@ -16,5 +16,7 @@
     <string name="optionsMain">burger</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_logged_in">logged_in</string>
+    <string name="title_friend_list">Friends</string>
+    <string name="title_friend_detail">Friend Detail</string>
 
 </resources>
