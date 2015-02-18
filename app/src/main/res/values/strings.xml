@@ -7,9 +7,10 @@
     <string name="title_activity_welcome_screen">WelcomeScreen</string>
     <string name="title_activity_user_registration">UserRegistration</string>
     <string name="title_activity_main_screen">mainScreen</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Friends List</string>
+    <string name="title_section3">Add Friends</string>
+    <string name="title_section4">Log out</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

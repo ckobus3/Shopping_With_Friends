@@ -26,8 +26,12 @@
             android:label="@string/title_activity_user_registration" >
         </activity>
         <activity
-            android:name=".LoggedIn"
+            android:name=".LogoutActivity"
             android:label="@string/title_activity_logged_in" >
+        </activity>
+        <activity
+            android:name=".MainScreen"
+            android:label="@string/title_activity_main_screen" >
         </activity>
     </application>
 
