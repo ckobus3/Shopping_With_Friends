@@ -6,7 +6,6 @@ public class User {
     private String username;
     private String password;
     private String email;
-    //private ArrayList<User> friends;
     private int rating;
     private int numReports;
     private boolean isLocked;
@@ -27,6 +26,10 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = pw;
+        email = "asdf@example.com";
+        //TODO add email to registration screen
+        rating = 0;
+        numReports = 0;
     }
 
     /**
@@ -196,5 +199,12 @@ public class User {
      */
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    @Override
+    public boolean equals(Object user) {
+        if (user instanceof User)
+            return ((User)user).getUsername().equals(this.username);
+        return false;
     }
 }

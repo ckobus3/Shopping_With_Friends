@@ -8,13 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.shoppingwithfriends.shoppingwithfriends.dummy.DummyContent;
-
 /**
  * A fragment representing a single Friend detail screen.
- * This fragment is either contained in a {@link FriendListActivity}
- * in two-pane mode (on tablets) or a {@link FriendDetailActivity}
- * on handsets.
  */
 public class FriendDetailFragment extends Fragment {
     /**
@@ -23,10 +18,8 @@ public class FriendDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private DummyContent.DummyItem mItem;
+
+    public static User user;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,12 +32,12 @@ public class FriendDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-        }
+
+        int id = Integer.parseInt(getArguments().getString("id"));
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+        user = db.getUser(id);
+        db.close();
+
     }
 
     @Override
@@ -52,10 +45,10 @@ public class FriendDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friend_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.friend_detail)).setText(mItem.content);
-        }
+        ((TextView) rootView.findViewById(R.id.textView7)).setText(user.getName());
+        ((TextView) rootView.findViewById(R.id.textView8)).setText(user.getEmail());
+        ((TextView) rootView.findViewById(R.id.textView9)).setText("" + user.getRating());
+        ((TextView) rootView.findViewById(R.id.textView10)).setText("" + user.getNumReports());
 
         return rootView;
     }

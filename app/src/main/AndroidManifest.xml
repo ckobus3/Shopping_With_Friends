@@ -33,18 +33,6 @@
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen" >
         </activity>
-        <activity
-            android:name=".FriendListActivity"
-            android:label="@string/title_friend_list" >
-        </activity>
-        <activity
-            android:name=".FriendDetailActivity"
-            android:label="@string/title_friend_detail"
-            android:parentActivityName=".FriendListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shoppingwithfriends.shoppingwithfriends.FriendListActivity" />
-        </activity>
     </application>
 
 </manifest>

@@ -2,8 +2,6 @@ package com.shoppingwithfriends.shoppingwithfriends;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,13 +19,17 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class FriendListFragment extends ListFragment {
+public class AddFriendFragment extends ListFragment {
+
 
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    private List nameList = new ArrayList();
+    private List<User> userList;
+    private ArrayAdapter mAdapter;
 
     /**
      * The fragment's current callback object, which is notified of list item
@@ -56,27 +58,30 @@ public class FriendListFragment extends ListFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public FriendListFragment() {
+    public AddFriendFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseHandler db = new DatabaseHandler(getActivity());
-        List<User> friendList = db.getAllFriends(User.currentUser);
-        db.close();
-        List nameList = new ArrayList();
-
-        for (User user : friendList) {
-            nameList.add(user.getName());
-        }
-
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<User>(
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+        userList = db.getAllUsers();
+        List friendList = db.getAllFriends(User.currentUser);
+        List<User> list = db.getAllUsers();
+        db.close();
+        for (User user : list) {
+            if (!user.equals(User.currentUser) && !friendList.contains(user)) {
+                nameList.add(user.getName());
+            } else
+                userList.remove(user);
+        }
+        mAdapter = new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                nameList));
+                nameList);
+        setListAdapter(mAdapter);
     }
 
     @Override
@@ -114,23 +119,17 @@ public class FriendListFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
-        Fragment frag = new FriendDetailFragment();
-        DatabaseHandler db = new DatabaseHandler(getActivity());
-        List<User> friendList = db.getAllFriends(User.currentUser);
-        db.close();
-
-        Bundle args= new Bundle();
-        args.putString("id", "" + friendList.get(position).getId());
-        frag.setArguments(args);
-
-        FragmentTransaction ft  = getFragmentManager().beginTransaction();
-        ft.replace(R.id.container, frag);
-        ft.addToBackStack(null);
-        ft.commit();
-
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        //mCallbacks.onItemSelected("", 1);
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+
+        db.addFriend(User.currentUser, userList.get(position));
+        db.close();
+        nameList.remove(position);
+        userList.remove(position);
+        mAdapter.notifyDataSetChanged();
+
+        //mCallbacks.onItemSelected("add", userList.get(position).getId());
     }
 
     @Override
@@ -163,5 +162,4 @@ public class FriendListFragment extends ListFragment {
 
         mActivatedPosition = position;
     }
-
 }

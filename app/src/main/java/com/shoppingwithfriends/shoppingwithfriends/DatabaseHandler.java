@@ -92,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, user.getName()); // user Name
         values.put(KEY_UN, user.getUsername()); // user username
         values.put(KEY_PW, user.getPassword()); // user pw
-        values.put(KEY_EMAIL, ""); // user email
+        values.put(KEY_EMAIL, user.getEmail()); // user email
         values.put(KEY_RATE, 0);
         values.put(KEY_NUM_REP, 0);
         values.put(KEY_ADMIN, 0);
