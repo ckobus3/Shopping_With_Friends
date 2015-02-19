@@ -128,6 +128,7 @@ public class MainScreen extends ActionBarActivity
         DatabaseHandler db = new DatabaseHandler(this);
         //removes the friend from the database
         db.deleteFriend(User.currentUser, FriendDetailFragment.user);
+        db.close();
 
         //goes to friend list fragment
         FragmentManager fragmentManager = getSupportFragmentManager();

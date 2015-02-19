@@ -52,6 +52,7 @@ public class UserRegistration extends Activity {
             Intent intent = new Intent(this, WelcomeScreen.class);
             startActivity(intent);
         }
+        db.close();
     }
 
     /**
