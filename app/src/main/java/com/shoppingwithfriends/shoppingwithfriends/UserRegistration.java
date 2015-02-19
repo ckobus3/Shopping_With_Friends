@@ -13,6 +13,7 @@ public class UserRegistration extends Activity {
     private EditText nameText;
     private EditText unText;
     private EditText passText;
+    private EditText emailText;
 
     /**
      * Sets content, creates new HashMap if one doesn't exist
@@ -26,6 +27,7 @@ public class UserRegistration extends Activity {
         nameText = (EditText)findViewById(R.id.editText);
         unText = (EditText)findViewById(R.id.editText2);
         passText = (EditText)findViewById(R.id.editText3);
+        emailText = (EditText)findViewById(R.id.editText4);
     }
 
     /**
@@ -34,19 +36,20 @@ public class UserRegistration extends Activity {
      */
     public void register(View view) {
         DatabaseHandler db = new DatabaseHandler(this);
-        String name;
-        if (nameText.getText() == null)
-            name = "";
-        else
-            name = nameText.getText().toString();
+        String name = nameText.getText().toString();
         String un = unText.getText().toString();
         String pass = passText.getText().toString();
+        String email = emailText.getText().toString();
         EditText mUsernameView = (EditText) findViewById(R.id.editText2);
+        if (un.equals("") || pass.equals("") || email.equals("") || name.equals("")) {
+            mUsernameView.setError("Every field must be completed");
+            mUsernameView.requestFocus();
+        }
         if (db.checkUser(un)) {
             mUsernameView.setError("Username already exists");
             mUsernameView.requestFocus();
         } else {
-            db.addUser(new User(name, un, pass));
+            db.addUser(new User(name, un, email, pass));
             Intent intent = new Intent(this, WelcomeScreen.class);
             startActivity(intent);
         }

@@ -22,12 +22,11 @@ public class User {
      * @param username
      * @param pw
      */
-    public User(String name, String username, String pw) {
+    public User(String name, String username, String email, String pw) {
         this.name = name;
         this.username = username;
         this.password = pw;
-        email = "asdf@example.com";
-        //TODO add email to registration screen
+        this.email = email;
         rating = 0;
         numReports = 0;
     }
