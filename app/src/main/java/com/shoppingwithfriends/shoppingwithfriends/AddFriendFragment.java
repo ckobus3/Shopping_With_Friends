@@ -64,18 +64,22 @@ public class AddFriendFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: replace with a real list adapter.
+
         DatabaseHandler db = new DatabaseHandler(getActivity());
         userList = db.getAllUsers();
         List friendList = db.getAllFriends(User.currentUser);
         List<User> list = db.getAllUsers();
         db.close();
+
+        //adds users to the list if the aren't the current user and aren't already a friend
         for (User user : list) {
             if (!user.equals(User.currentUser) && !friendList.contains(user)) {
                 nameList.add(user.getName());
             } else
-                userList.remove(user);
+                userList.remove(user); //removes the irrelevant user
         }
+
+        //sets the adapter to the new list of names
         mAdapter = new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
@@ -122,11 +126,12 @@ public class AddFriendFragment extends ListFragment {
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
         DatabaseHandler db = new DatabaseHandler(getActivity());
-
+        //adds the user to the database as a friend of the current user
         db.addFriend(User.currentUser, userList.get(position));
         db.close();
         nameList.remove(position);
         userList.remove(position);
+        //refreshes the adapter
         mAdapter.notifyDataSetChanged();
 
         //mCallbacks.onItemSelected("add", userList.get(position).getId());

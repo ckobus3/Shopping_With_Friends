@@ -66,12 +66,12 @@ public class FriendListFragment extends ListFragment {
         List<User> friendList = db.getAllFriends(User.currentUser);
         db.close();
         List nameList = new ArrayList();
-
+        //adds all friends of a user to a list
         for (User user : friendList) {
             nameList.add(user.getName());
         }
 
-        // TODO: replace with a real list adapter.
+        //creates an adapter holding the friends of the user to be displayed
         setListAdapter(new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
@@ -114,15 +114,18 @@ public class FriendListFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
+        //creates a new fragment and database
         Fragment frag = new FriendDetailFragment();
         DatabaseHandler db = new DatabaseHandler(getActivity());
         List<User> friendList = db.getAllFriends(User.currentUser);
         db.close();
 
+        //puts the id of the user selected into a Bundle and gives it to the fragment
         Bundle args= new Bundle();
         args.putString("id", "" + friendList.get(position).getId());
         frag.setArguments(args);
 
+        //loads the new fragment onto the page
         FragmentTransaction ft  = getFragmentManager().beginTransaction();
         ft.replace(R.id.container, frag);
         ft.addToBackStack(null);

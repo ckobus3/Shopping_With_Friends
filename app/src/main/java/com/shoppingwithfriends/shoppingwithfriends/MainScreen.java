@@ -42,17 +42,17 @@ public class MainScreen extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        if (position == 1) {
+        if (position == 1) { //goes to friend list
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new FriendListFragment())
                     .commit();
-        } else if (position == 2) {
+        } else if (position == 2) { //goes to add friend
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddFriendFragment())
                     .commit();
-        } else if (position == 3) {
+        } else if (position == 3) { //logs out
             logout();
         } else {
 
@@ -126,8 +126,10 @@ public class MainScreen extends ActionBarActivity
 
     public void removeFriend(View view) {
         DatabaseHandler db = new DatabaseHandler(this);
+        //removes the friend from the database
         db.deleteFriend(User.currentUser, FriendDetailFragment.user);
 
+        //goes to friend list fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, new FriendListFragment())

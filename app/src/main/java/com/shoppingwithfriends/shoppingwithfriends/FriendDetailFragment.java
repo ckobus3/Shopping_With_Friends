@@ -12,12 +12,6 @@ import android.widget.TextView;
  * A fragment representing a single Friend detail screen.
  */
 public class FriendDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
-    public static final String ARG_ITEM_ID = "item_id";
-
 
     public static User user;
 
@@ -32,9 +26,10 @@ public class FriendDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        //gets id of user from the bundle
         int id = Integer.parseInt(getArguments().getString("id"));
         DatabaseHandler db = new DatabaseHandler(getActivity());
+        //creates user from the id given
         user = db.getUser(id);
         db.close();
 
@@ -45,6 +40,7 @@ public class FriendDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friend_detail, container, false);
 
+        //sets fields to the user's data
         ((TextView) rootView.findViewById(R.id.textView7)).setText(user.getName());
         ((TextView) rootView.findViewById(R.id.textView8)).setText(user.getEmail());
         ((TextView) rootView.findViewById(R.id.textView9)).setText("" + user.getRating());

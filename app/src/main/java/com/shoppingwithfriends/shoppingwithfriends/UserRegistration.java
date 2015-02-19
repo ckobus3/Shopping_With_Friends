@@ -44,8 +44,7 @@ public class UserRegistration extends Activity {
         if (un.equals("") || pass.equals("") || email.equals("") || name.equals("")) {
             mUsernameView.setError("Every field must be completed");
             mUsernameView.requestFocus();
-        }
-        if (db.checkUser(un)) {
+        } else if (db.checkUser(un)) {
             mUsernameView.setError("Username already exists");
             mUsernameView.requestFocus();
         } else {
