@@ -22,6 +22,10 @@ public class FriendDetailFragment extends Fragment {
     public FriendDetailFragment() {
     }
 
+    /**
+     * Called when the activity is starting
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,12 @@ public class FriendDetailFragment extends Fragment {
 
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return rootView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

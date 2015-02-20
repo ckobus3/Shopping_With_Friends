@@ -59,6 +59,10 @@ public class FriendListFragment extends ListFragment {
     public FriendListFragment() {
     }
 
+    /**
+     * display proper list
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,10 @@ public class FriendListFragment extends ListFragment {
                 nameList));
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,6 +98,10 @@ public class FriendListFragment extends ListFragment {
         }
     }
 
+    /**
+     * Called when fragment is connected to activity
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -102,6 +114,9 @@ public class FriendListFragment extends ListFragment {
         mCallbacks = (Callbacks) activity;
     }
 
+    /**
+     * Called when fragment is not connected to activity
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -110,6 +125,12 @@ public class FriendListFragment extends ListFragment {
         mCallbacks = null;
     }
 
+    /**
+     * @param listView
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
@@ -136,6 +157,11 @@ public class FriendListFragment extends ListFragment {
         //mCallbacks.onItemSelected("", 1);
     }
 
+    /**
+     * Called to retrieve per-instance state from an activity
+     * before being killed so that the state can be restored
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -148,6 +174,7 @@ public class FriendListFragment extends ListFragment {
     /**
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
+     * @param activateOnItemClick
      */
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
@@ -157,6 +184,9 @@ public class FriendListFragment extends ListFragment {
                 : ListView.CHOICE_MODE_NONE);
     }
 
+    /**
+     * @param position
+     */
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
