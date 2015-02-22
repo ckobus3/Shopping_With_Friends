@@ -52,7 +52,7 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddFriendFragment())
                     .commit();
-        } else if (position == 3) { //logs out
+        } else if (position == 4) { //logs out
             logout();
         } else {
 
@@ -71,6 +71,9 @@ public class MainScreen extends ActionBarActivity
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
                 mTitle = getString(R.string.title_section4);
                 break;
         }
