@@ -52,7 +52,7 @@ public class AddItem extends ListFragment {
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
         List<ItemRequest> itemList;
-        itemList = db.getRequestsByUser();
+        itemList = new ItemRequest(db.getRequestsByUser(User user));
         db.close();
         for (ItemRequest item : itemList ) {
             if (!item.equals(currentItem) && !itemList.contains(item)) {
