@@ -20,5 +20,7 @@
     <string name="title_activity_logged_in">logged_in</string>
     <string name="title_friend_list">Friends</string>
     <string name="title_friend_detail">Friend Detail</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
 
 </resources>
