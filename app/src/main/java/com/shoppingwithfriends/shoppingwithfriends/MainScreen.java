@@ -161,10 +161,15 @@ public class MainScreen extends ActionBarActivity
         String price = priceText.getText().toString();
         String location = locText.getText().toString();
         EditText mNameView = (EditText) findViewById(R.id.editText);
+        EditText mPriceView = (EditText) findViewById(R.id.editText2);
         if (name.equals("") || price.equals("")) {
             mNameView.setError("Name and price must be completed");
             mNameView.requestFocus();
+        } else if (!isNumber(price)) {
+            mPriceView.setError("Price must be an integer");
+            mPriceView.requestFocus();
         } else {
+
             ItemRequest item = new ItemRequest(User.currentUser, name,
                     Integer.parseInt(price), location);
             db.addItemRequest(item);
@@ -173,6 +178,16 @@ public class MainScreen extends ActionBarActivity
 
             gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
         }
+    }
+
+    public static boolean isNumber(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
     }
 
     /**
