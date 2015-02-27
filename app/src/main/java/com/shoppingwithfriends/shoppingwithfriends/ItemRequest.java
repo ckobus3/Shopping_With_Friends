@@ -1,6 +1,8 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
 
+import android.support.v4.app.FragmentActivity;
+
 public class ItemRequest {
 
     private int requestId;
@@ -8,8 +10,9 @@ public class ItemRequest {
     private String name;
     private int maxPrice;
     private String location;
+    public static ItemRequest currentItem;
 
-    public ItemRequest() {
+    public ItemRequest(FragmentActivity activity) {
     }
 
     public ItemRequest(User user, String name, int price, String location) {
