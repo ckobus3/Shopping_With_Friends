@@ -53,6 +53,11 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddFriendFragment())
                     .commit();
+        } else if (position == 3) { //logs out
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new AddItemFragment())
+                    .commit();
         } else if (position == 4) { //logs out
             logout();
         } else {
