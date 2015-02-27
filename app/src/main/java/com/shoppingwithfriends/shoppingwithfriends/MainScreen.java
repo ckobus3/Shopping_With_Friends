@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class MainScreen extends ActionBarActivity
@@ -138,5 +139,43 @@ public class MainScreen extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, new FriendListFragment())
                 .commit();
+    }
+
+    /**
+     * Adds a new item request the user
+     * @param view the item request view
+     */
+    public void addItemRequest(View view) {
+        //Button button = (Button) findViewById(R.id.button);
+        EditText nameText = (EditText) findViewById(R.id.editText);
+        EditText priceText = (EditText) findViewById(R.id.editText2);
+        EditText locText = (EditText) findViewById(R.id.editText4);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+        String name = nameText.getText().toString();
+        String price = priceText.getText().toString();
+        String location = locText.getText().toString();
+        EditText mNameView = (EditText) findViewById(R.id.editText);
+        if (name.equals("") || price.equals("")) {
+            mNameView.setError("Name and price must be completed");
+            mNameView.requestFocus();
+        } else {
+            ItemRequest item = new ItemRequest(User.currentUser, name,
+                    Integer.parseInt(price), location);
+            db.addItemRequest(item);
+
+            db.close();
+
+            gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
+        }
+    }
+
+    /**
+     * Returns to the Welcome Screen if user decides to cancel registration
+     * @param view the registration view
+     */
+    public void gotoMainScreen(View view) {
+        Intent intent = new Intent(this, MainScreen.class);
+        startActivity(intent);
     }
 }
