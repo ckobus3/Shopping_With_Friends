@@ -58,9 +58,13 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddItemFragment())
                     .commit();
+        } else if (position == 5) { //logs out
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new ItemListFragment())
+                    .commit();
         } else if (position == 4) { //logs out
             logout();
-        } else {
 
         }
     }
@@ -80,7 +84,7 @@ public class MainScreen extends ActionBarActivity
                 mTitle = getString(R.string.title_section4);
                 break;
             case 5:
-                mTitle = getString(R.string.title_section4);
+                mTitle = "Item List";
                 break;
         }
     }
@@ -179,6 +183,18 @@ public class MainScreen extends ActionBarActivity
             gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
         }
     }
+//    public void removeItem(View view) {
+//        DatabaseHandler db = new DatabaseHandler(this);
+//        //removes the friend from the database
+//        db.deleteFriend(User.currentUser, FriendDetailFragment.user);
+//        db.close();
+//
+//        //goes to friend list fragment
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, new FriendListFragment())
+//                .commit();
+//    }
 
     public static boolean isNumber(String s) {
         try {

@@ -11,7 +11,8 @@ public class ItemRequest {
 
     public ItemRequest() {
     }
-
+    // this takes in the User, name, price and location of the item
+    // and add it to the item list
     public ItemRequest(User user, String name, int price, String location) {
         this.requester = user;
         this.name = name;
@@ -21,7 +22,7 @@ public class ItemRequest {
 
     public int getRequestId() {
         return requestId;
-    }
+    } // returns user ID
 
     public void setRequestId(int id) {
         this.requestId = id;
@@ -37,7 +38,7 @@ public class ItemRequest {
 
     public String getName() {
         return name;
-    }
+    } // returns name
 
     public void setName(String name) {
         this.name = name;
@@ -45,7 +46,7 @@ public class ItemRequest {
 
     public int getMaxPrice() {
         return maxPrice;
-    }
+    } // return price
 
     public void setMaxPrice(int price) {
         this.maxPrice = price;
@@ -53,7 +54,7 @@ public class ItemRequest {
 
     public String getLocation() {
         return location;
-    }
+    } // return location of the item
 
     public void setLocation(String loc) {
         this.location = loc;
