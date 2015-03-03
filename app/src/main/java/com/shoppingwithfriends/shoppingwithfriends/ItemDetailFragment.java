@@ -29,11 +29,7 @@ public class ItemDetailFragment extends Fragment {
      */
     public ItemDetailFragment() {
     }
-<<<<<<< HEAD
-    // this method gets the description of the item
-=======
 
->>>>>>> origin/master
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

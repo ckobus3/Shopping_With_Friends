@@ -1,10 +1,7 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
-<<<<<<< HEAD
 
-=======
-import android.app.Activity;
->>>>>>> origin/master
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -108,7 +105,7 @@ public class ItemListFragment extends ListFragment {
         }
     }
 
-<<<<<<< HEAD
+
 //    @Override
 //    public void onAttach(Activity activity) {
 //        super.onAttach(activity);
@@ -135,7 +132,7 @@ public class ItemListFragment extends ListFragment {
      * @param position provides the locations of the item
      * @param id gives the ID
      * @return this displays the list of the item
-=======
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -161,20 +158,18 @@ public class ItemListFragment extends ListFragment {
      * @param view
      * @param position
      * @param id
->>>>>>> origin/master
+
      */
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
-<<<<<<< HEAD
        // this accesses the database and retrieves the item that has been added
         // and display it as a list
 
 
-=======
         //creates a new fragment and database
->>>>>>> origin/master
+
         Fragment frag = new ItemDetailFragment();
         DatabaseHandler db = new DatabaseHandler(getActivity());
         List<ItemRequest> itemList = db.getRequestsByUser(User.currentUser);
