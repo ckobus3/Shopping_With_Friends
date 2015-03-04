@@ -43,7 +43,10 @@ public class MainScreen extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        if (position == 1) { //goes to friend list
+        if (position == 0) {
+            mainscreen();
+        }
+        else if (position == 1) { //goes to friend list
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new FriendListFragment())
@@ -128,6 +131,10 @@ public class MainScreen extends ActionBarActivity
     public void logout() {
         Intent logout = new Intent(this, LogoutActivity.class);
         startActivity(logout);
+    }
+    public void mainscreen() {
+        Intent main = new Intent(this, MainScreen.class);
+        startActivity(main);
     }
 
     @Override
