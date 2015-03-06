@@ -11,7 +11,9 @@
     <string name="title_section2">Friends List</string>
     <string name="title_section3">Add Friends</string>
     <string name="title_section4">Add Item</string>
-    <string name="title_section5">Log out</string>
+    <string name="title_section5">Item List</string>
+    <string name="title_section6">report Item</string>
+    <string name="title_section7">Log out</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -22,5 +24,6 @@
     <string name="title_friend_detail">Friend Detail</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
