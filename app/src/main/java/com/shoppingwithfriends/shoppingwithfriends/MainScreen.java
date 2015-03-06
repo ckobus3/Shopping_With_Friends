@@ -1,6 +1,7 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 
 
 public class MainScreen extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -198,7 +199,7 @@ public class MainScreen extends ActionBarActivity
             gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
         }
     }
-    public void reportItem() {
+    public void reportItem(View view) {
         EditText nameText = (EditText) findViewById(R.id.editText);
         EditText priceText = (EditText) findViewById(R.id.editText2);
         EditText locText = (EditText) findViewById(R.id.editText4);
@@ -217,8 +218,9 @@ public class MainScreen extends ActionBarActivity
             mPriceView.requestFocus();
         } else {
 
-            ItemReport item = new ItemReport(User.currentUser, name,
+            Item item = new Item(User.currentUser, name,
                     Integer.parseInt(price), location);
+            db.addItemFoundPost(item);
 
             db.close();
 
@@ -255,5 +257,10 @@ public class MainScreen extends ActionBarActivity
     public void gotoMainScreen(View view) {
         Intent intent = new Intent(this, MainScreen.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
