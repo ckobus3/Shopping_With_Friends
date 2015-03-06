@@ -42,8 +42,11 @@ public class MainScreen extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        if (position == 0) {
+
+        }
         // update the main content by replacing fragments
-        if (position == 1) { //goes to friend list
+        else if (position == 1) { //goes to friend list
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new FriendListFragment())
@@ -53,17 +56,23 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddFriendFragment())
                     .commit();
-        } else if (position == 3) { //logs out
+        } else if (position == 3) { //goes to add item
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddItemFragment())
                     .commit();
-        } else if (position == 5) { //logs out
+        } else if (position == 4) { //goes to item list
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new ItemListFragment())
                     .commit();
-        } else if (position == 4) { //logs out
+        } else if (position == 5) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new ReportItemFragment())
+                    .commit();
+        }
+        else if (position == 6) { //logs out
             logout();
 
         }
@@ -84,7 +93,13 @@ public class MainScreen extends ActionBarActivity
                 mTitle = getString(R.string.title_section4);
                 break;
             case 5:
-                mTitle = "Item List";
+                mTitle = getString(R.string.title_section5);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_section6);
+                break;
+            case 7:
+                mTitle = getString(R.string.title_section7);
                 break;
         }
     }
@@ -177,6 +192,33 @@ public class MainScreen extends ActionBarActivity
             ItemRequest item = new ItemRequest(User.currentUser, name,
                     Integer.parseInt(price), location);
             db.addItemRequest(item);
+
+            db.close();
+
+            gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
+        }
+    }
+    public void reportItem() {
+        EditText nameText = (EditText) findViewById(R.id.editText);
+        EditText priceText = (EditText) findViewById(R.id.editText2);
+        EditText locText = (EditText) findViewById(R.id.editText4);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+        String name = nameText.getText().toString();
+        String price = priceText.getText().toString();
+        String location = locText.getText().toString();
+        EditText mNameView = (EditText) findViewById(R.id.editText);
+        EditText mPriceView = (EditText) findViewById(R.id.editText2);
+        if (name.equals("") || price.equals("")) {
+            mNameView.setError("Name and price must be completed");
+            mNameView.requestFocus();
+        } else if (!isNumber(price)) {
+            mPriceView.setError("Price must be an integer");
+            mPriceView.requestFocus();
+        } else {
+
+            ItemReport item = new ItemReport(User.currentUser, name,
+                    Integer.parseInt(price), location);
 
             db.close();
 
