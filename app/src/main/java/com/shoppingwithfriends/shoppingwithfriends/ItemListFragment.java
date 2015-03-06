@@ -79,15 +79,15 @@ public class ItemListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         DatabaseHandler db = new DatabaseHandler(getActivity());
-        List<ItemRequest> itemList = db.getRequestsByUser(User.currentUser);
+        List<Item> itemList = db.getItemsRequestedByUser(User.currentUser);
         db.close();
         List itemNameList = new ArrayList();
         //create list with names of all items for the user
-        for (ItemRequest item: itemList) {
+        for (Item item: itemList) {
             itemNameList.add(item.getName());
         }
 
-        setListAdapter(new ArrayAdapter<ItemRequest>(
+        setListAdapter(new ArrayAdapter<Item>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -172,12 +172,12 @@ public class ItemListFragment extends ListFragment {
 
         Fragment frag = new ItemDetailFragment();
         DatabaseHandler db = new DatabaseHandler(getActivity());
-        List<ItemRequest> itemList = db.getRequestsByUser(User.currentUser);
+        List<Item> itemList = db.getItemsRequestedByUser(User.currentUser);
         db.close();
 
         //gets id of item and put into bundle
         Bundle args= new Bundle();
-        args.putString("id", "" + itemList.get(position).getRequestId());
+        args.putString("id", "" + itemList.get(position).getPostId());
         frag.setArguments(args);
 
         //loads the new fragment onto the page

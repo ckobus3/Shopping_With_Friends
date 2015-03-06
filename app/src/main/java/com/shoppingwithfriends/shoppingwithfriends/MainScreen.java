@@ -174,7 +174,7 @@ public class MainScreen extends ActionBarActivity
             mPriceView.requestFocus();
         } else {
 
-            ItemRequest item = new ItemRequest(User.currentUser, name,
+            Item item = new Item(User.currentUser, name,
                     Integer.parseInt(price), location);
             db.addItemRequest(item);
 

@@ -1,39 +1,39 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
 
-public class ItemRequest {
+public class Item {
 
-    private int requestId;
-    private User requester;
+    private int postId;
+    private User poster;
     private String name;
-    private int maxPrice;
+    private int price;
     private String location;
 
-    public ItemRequest() {
+    public Item() {
     }
     // this takes in the User, name, price and location of the item
     // and add it to the item list
-    public ItemRequest(User user, String name, int price, String location) {
-        this.requester = user;
+    public Item(User user, String name, int price, String location) {
+        this.poster = user;
         this.name = name;
-        this.maxPrice = price;
+        this.price = price;
         this.location = location;
     }
 
-    public int getRequestId() {
-        return requestId;
+    public int getPostId() {
+        return postId;
     } // returns user ID
 
-    public void setRequestId(int id) {
-        this.requestId = id;
+    public void setPostId(int id) {
+        this.postId = id;
     }
 
-    public User getRequester() {
-        return requester;
+    public User getPoster() {
+        return poster;
     }
 
-    public void setRequester(User user) {
-        this.requester = user;
+    public void setPoster(User user) {
+        this.poster = user;
     }
 
     public String getName() {
@@ -44,12 +44,12 @@ public class ItemRequest {
         this.name = name;
     }
 
-    public int getMaxPrice() {
-        return maxPrice;
+    public int getPrice() {
+        return price;
     } // return price
 
-    public void setMaxPrice(int price) {
-        this.maxPrice = price;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getLocation() {
