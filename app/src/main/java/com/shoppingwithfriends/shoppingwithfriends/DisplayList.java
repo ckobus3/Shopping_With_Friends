@@ -57,13 +57,9 @@ public class DisplayList extends Fragment {
         db.close();
         List mainDisplayList = new ArrayList();
         //create list with names of all items for the user
-        if (mainList != null) {
-            Log.d("ok", "abc");
-            for (Item item : mainList) {
-                mainDisplayList.add(item.getName());
-            }
-        } else {
-            Log.d("ok", "def");
+        Log.d("ok", "abc");
+        for (Item item : mainList) {
+            mainDisplayList.add(item.getName());
         }
 
         // TODO: Change Adapter to display your content
