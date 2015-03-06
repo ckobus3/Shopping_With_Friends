@@ -1,7 +1,8 @@
 package com.shoppingwithfriends.shoppingwithfriends;
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +53,17 @@ public class DisplayList extends Fragment {
         super.onCreate(savedInstanceState);
 
         DatabaseHandler db = new DatabaseHandler(getActivity());
-        List<Item> mainList = db.getItemsFoundByUser(User.currentUser);
+        List<Item> mainList = db.getMatches(User.currentUser);
         db.close();
         List mainDisplayList = new ArrayList();
         //create list with names of all items for the user
-        for (Item item: mainList) {
-            mainDisplayList.add(item.getName());
+        if (mainList != null) {
+            Log.d("ok", "abc");
+            for (Item item : mainList) {
+                mainDisplayList.add(item.getName());
+            }
+        } else {
+            Log.d("ok", "def");
         }
 
         // TODO: Change Adapter to display your content
