@@ -72,11 +72,9 @@
         android:textColor="#1E90FF"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/editText3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"

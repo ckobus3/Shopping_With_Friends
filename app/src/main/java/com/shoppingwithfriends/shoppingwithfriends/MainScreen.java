@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.EditText;
 
 
 public class MainScreen extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener, DisplayList.Callbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -45,7 +44,6 @@ public class MainScreen extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Log.d("tag", "" + position);
         if (position == 0) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
@@ -76,7 +74,6 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new ReportItemFragment())
                     .commit();
-
         } else if (position == 6) {
             logout();
         }
