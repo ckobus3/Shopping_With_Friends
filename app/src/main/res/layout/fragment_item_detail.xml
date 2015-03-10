@@ -78,4 +78,21 @@
         android:layout_below="@+id/textView15"
         android:layout_alignRight="@+id/textView15"
         android:layout_alignEnd="@+id/textView15" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Location"
+        android:id="@+id/location"
+        android:clickable="true"
+        android:onClick=""
+        android:background="@drawable/mybutton"
+        android:textColor="#1E90FF"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textView16"
+        android:layout_alignEnd="@+id/textView16" />
 </RelativeLayout>

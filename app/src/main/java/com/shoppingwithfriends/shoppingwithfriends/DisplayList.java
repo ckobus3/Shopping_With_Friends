@@ -2,6 +2,8 @@ package com.shoppingwithfriends.shoppingwithfriends;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -139,6 +141,21 @@ public class DisplayList extends ListFragment {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
+        Fragment frag = new ItemDetailFragment();
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+        List<Item> itemList = db.getMatches(User.currentUser);
+        db.close();
+
+        //gets id of item and put into bundle
+        Bundle args= new Bundle();
+        args.putString("id", "" + itemList.get(position).getPostId());
+        frag.setArguments(args);
+
+        //loads the new fragment onto the page
+        FragmentTransaction ft  = getFragmentManager().beginTransaction();
+        ft.replace(R.id.container, frag);
+        ft.addToBackStack(null);
+        ft.commit();
        /* //creates a new fragment and database
         Fragment frag = new FriendDetailFragment();
         DatabaseHandler db = new DatabaseHandler(getActivity());
