@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 
 public class MainScreen extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener, DisplayList.Callbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -43,21 +43,23 @@ public class MainScreen extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        if (position == 0) {
-
-        }
         // update the main content by replacing fragments
-        else if (position == 1) { //goes to friend list
+        if (position == 0) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new DisplayList())
+                            .commit();
+        } else if (position == 1) { // goes to friend list
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new FriendListFragment())
                     .commit();
-        } else if (position == 2) { //goes to add friend
+        } else if (position == 2) { //adds friend
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddFriendFragment())
                     .commit();
-        } else if (position == 3) { //goes to add item
+        } else if (position == 3) { // add item
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new AddItemFragment())
@@ -72,10 +74,8 @@ public class MainScreen extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new ReportItemFragment())
                     .commit();
-        }
-        else if (position == 6) { //logs out
+        } else if (position == 6) {
             logout();
-
         }
     }
 
@@ -94,13 +94,13 @@ public class MainScreen extends ActionBarActivity
                 mTitle = getString(R.string.title_section4);
                 break;
             case 5:
-                mTitle = getString(R.string.title_section5);
+                mTitle = "Item List";
                 break;
             case 6:
-                mTitle = getString(R.string.title_section6);
+                mTitle = "Report Item";
                 break;
             case 7:
-                mTitle = getString(R.string.title_section7);
+                mTitle = "Log out";
                 break;
         }
     }
@@ -199,34 +199,6 @@ public class MainScreen extends ActionBarActivity
             gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
         }
     }
-    public void reportItem(View view) {
-        EditText nameText = (EditText) findViewById(R.id.editText);
-        EditText priceText = (EditText) findViewById(R.id.editText2);
-        EditText locText = (EditText) findViewById(R.id.editText4);
-
-        DatabaseHandler db = new DatabaseHandler(this);
-        String name = nameText.getText().toString();
-        String price = priceText.getText().toString();
-        String location = locText.getText().toString();
-        EditText mNameView = (EditText) findViewById(R.id.editText);
-        EditText mPriceView = (EditText) findViewById(R.id.editText2);
-        if (name.equals("") || price.equals("")) {
-            mNameView.setError("Name and price must be completed");
-            mNameView.requestFocus();
-        } else if (!isNumber(price)) {
-            mPriceView.setError("Price must be an integer");
-            mPriceView.requestFocus();
-        } else {
-
-            Item item = new Item(User.currentUser, name,
-                    Integer.parseInt(price), location);
-            db.addItemFoundPost(item);
-
-            db.close();
-
-            gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
-        }
-    }
 //    public void removeItem(View view) {
 //        DatabaseHandler db = new DatabaseHandler(this);
 //        //removes the friend from the database
@@ -257,6 +229,35 @@ public class MainScreen extends ActionBarActivity
     public void gotoMainScreen(View view) {
         Intent intent = new Intent(this, MainScreen.class);
         startActivity(intent);
+    }
+
+    public void reportItem(View view) {
+        EditText nameText = (EditText) findViewById(R.id.editText);
+        EditText priceText = (EditText) findViewById(R.id.editText2);
+        EditText locText = (EditText) findViewById(R.id.editText4);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+        String name = nameText.getText().toString();
+        String price = priceText.getText().toString();
+        String location = locText.getText().toString();
+        EditText mNameView = (EditText) findViewById(R.id.editText);
+        EditText mPriceView = (EditText) findViewById(R.id.editText2);
+        if (name.equals("") || price.equals("")) {
+            mNameView.setError("Name and price must be completed");
+            mNameView.requestFocus();
+        } else if (!isNumber(price)) {
+            mPriceView.setError("Price must be an integer");
+            mPriceView.requestFocus();
+        } else {
+
+            Item item = new Item(User.currentUser, name,
+                    Integer.parseInt(price), location);
+            db.addItemFoundPost(item);
+
+            db.close();
+
+            gotoMainScreen(getWindow().getDecorView().findViewById(android.R.id.content));
+        }
     }
 
     @Override
