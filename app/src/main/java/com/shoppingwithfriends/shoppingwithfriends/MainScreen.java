@@ -264,4 +264,14 @@ public class MainScreen extends ActionBarActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    public void viewMap(View view) {
+
+
+        //loads the new fragment onto the page
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, MainMapsFragment.newInstance(2))
+                .commit();
+    }
 }
