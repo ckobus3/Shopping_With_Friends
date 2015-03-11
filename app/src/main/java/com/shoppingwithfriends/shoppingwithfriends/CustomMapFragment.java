@@ -29,13 +29,14 @@ public class CustomMapFragment extends com.google.android.gms.maps.SupportMapFra
 
         Geocoder gc = new Geocoder(getActivity().getApplicationContext());
         try {
-            List<Address> ad = gc.getFromLocationName("place", 1, 32.985997, -85.124942, 34.701339, -83.350650);
+            String loc = getArguments().getString("location");
+            List<Address> ad = gc.getFromLocationName(loc, 1, 32.985997, -85.124942, 34.701339, -83.350650);
             if (ad != null && ad.size() > 0) {
                 LatLng place = new LatLng(ad.get(0).getLatitude(), ad.get(0).getLongitude());
                 /* GeoPoint point = new GeoPoint(
                         (int) (a.getLatitude() * _1E6),
                         (int) (a.getLongitude() * _1E6)); */
-                googleMap.addMarker(new MarkerOptions().position(place).title("place"));
+                googleMap.addMarker(new MarkerOptions().position(place).title(loc));
             }
         } catch (IOException e) {
             e.printStackTrace();

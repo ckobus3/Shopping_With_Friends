@@ -13,6 +13,11 @@ public class MapsFragment extends android.support.v4.app.Fragment {
         View rootView = inflater.inflate(R.layout.maps_fragment, container, false);
 
         CustomMapFragment mapFragment = new CustomMapFragment();
+
+        Bundle args= new Bundle();
+        args.putString("location", getArguments().getString("location"));
+        mapFragment.setArguments(args);
+
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.map_container, mapFragment).commit();
         return rootView;
