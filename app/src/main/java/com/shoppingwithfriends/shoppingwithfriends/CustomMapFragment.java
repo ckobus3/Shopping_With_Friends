@@ -29,7 +29,7 @@ public class CustomMapFragment extends com.google.android.gms.maps.SupportMapFra
 
         Geocoder gc = new Geocoder(getActivity().getApplicationContext());
         try {
-            String loc = getArguments().getString("location");
+            String loc = ItemDetailFragment.loc;
             List<Address> ad = gc.getFromLocationName(loc, 1, 32.985997, -85.124942, 34.701339, -83.350650);
             if (ad != null && ad.size() > 0) {
                 LatLng place = new LatLng(ad.get(0).getLatitude(), ad.get(0).getLongitude());

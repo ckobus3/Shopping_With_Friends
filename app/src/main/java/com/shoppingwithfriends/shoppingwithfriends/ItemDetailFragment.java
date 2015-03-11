@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -19,6 +18,8 @@ public class ItemDetailFragment extends Fragment {
      * represents.
      */
     public static Item item;
+    public static String loc;
+
 
 
     /**
@@ -48,8 +49,7 @@ public class ItemDetailFragment extends Fragment {
         ((TextView) rootView.findViewById(R.id.textView14)).setText(item.getName());
         ((TextView) rootView.findViewById(R.id.textView15)).setText("" + item.getPrice());
         ((TextView) rootView.findViewById(R.id.textView16)).setText(item.getLocation());
-        ((Button) rootView.findViewById(R.id.location)).setTag(item.getLocation());
-
+        loc = item.getLocation();
         return rootView;
     }
 }

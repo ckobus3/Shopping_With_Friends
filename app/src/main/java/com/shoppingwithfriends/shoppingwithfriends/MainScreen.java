@@ -3,7 +3,6 @@ package com.shoppingwithfriends.shoppingwithfriends;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -267,17 +266,12 @@ public class MainScreen extends ActionBarActivity
     }
 
     public void viewMap(View view) {
-        Fragment frag = new MapsFragment();
-        String loc = (String) view.getTag();
 
-        Bundle args= new Bundle();
-        args.putString("location", loc);
-        frag.setArguments(args);
 
         //loads the new fragment onto the page
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, new DisplayList())
+                .replace(R.id.container, MainMapsFragment.newInstance(2))
                 .commit();
     }
 }
