@@ -22,6 +22,7 @@ public class User {
      * @param username
      * @param pw
      */
+    @SuppressWarnings("JavaDoc")
     public User(String name, String username, String email, String pw) {
         this.name = name;
         this.username = username;
@@ -43,6 +44,7 @@ public class User {
      * @param isLocked
      * @param isAdmin
      */
+    @SuppressWarnings("JavaDoc")
     public User(int id, String name, String username, String pw, String email, int rating,
                 int numReports, int isLocked, int isAdmin) {
         this.id = id;
@@ -202,8 +204,6 @@ public class User {
 
     @Override
     public boolean equals(Object user) {
-        if (user instanceof User)
-            return ((User)user).getUsername().equals(this.username);
-        return false;
+            return (((User)user).getUsername().equals(this.username) && user instanceof User);
     }
 }

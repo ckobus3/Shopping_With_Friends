@@ -12,6 +12,7 @@ import android.widget.TextView;
 /**
  * A fragment representing a single Item detail screen.
  */
+@SuppressWarnings("ALL")
 public class ItemDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment

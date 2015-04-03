@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+@SuppressWarnings("ALL")
 public class MainMapsFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this

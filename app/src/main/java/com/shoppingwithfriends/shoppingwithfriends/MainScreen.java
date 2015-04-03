@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 
+@SuppressWarnings("ALL")
 public class MainScreen extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, FriendListFragment.Callbacks, AddFriendFragment.Callbacks, ReportItemFragment.OnFragmentInteractionListener, DisplayList.Callbacks {
 
@@ -107,6 +108,7 @@ public class MainScreen extends ActionBarActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
+        //noinspection deprecation,deprecation
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);

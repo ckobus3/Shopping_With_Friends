@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.shoppingwithfriends.shoppingwithfriends.LoginActivity"
-    android:background="#1E90FF">
+    android:background="#1E90FF"
+    tools:ignore="Overdraw">
 
     <!-- Login progress -->
     <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
@@ -41,7 +42,8 @@
                 android:background="@drawable/mybutton"
                 android:clickable="true"
                 android:textColor="#1E90FF"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                tools:ignore="SpUsage" />
 
             <Button android:id="@+id/cancel" style="?android:textAppearanceSmall"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -51,7 +53,8 @@
                 android:background="@drawable/mybutton"
                 android:clickable="true"
                 android:textColor="#1E90FF"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </ScrollView>

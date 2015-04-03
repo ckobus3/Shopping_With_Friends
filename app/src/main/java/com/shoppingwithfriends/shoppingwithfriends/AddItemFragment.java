@@ -11,6 +11,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  */
+@SuppressWarnings("ALL")
 public class AddItemFragment extends Fragment {
 
     public AddItemFragment() {
@@ -20,6 +21,7 @@ public class AddItemFragment extends Fragment {
      * Called when the activity is starting
      * @param savedInstanceState
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class AddItemFragment extends Fragment {
      * @param savedInstanceState
      * @return rootView
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

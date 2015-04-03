@@ -22,6 +22,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
+@SuppressWarnings("ALL")
 public class DisplayList extends ListFragment {
 
     /**
@@ -64,6 +65,7 @@ public class DisplayList extends ListFragment {
      * display proper list
      * @param savedInstanceState
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class DisplayList extends ListFragment {
         List mainDisplayList = new ArrayList();
         //create list with names of all items for the user
         for (Item item : mainList) {
+            //noinspection unchecked
             mainDisplayList.add(item.getName());
         }
 
@@ -82,6 +85,7 @@ public class DisplayList extends ListFragment {
         }
 
         //creates an adapter holding the friends of the user to be displayed
+        //noinspection unchecked
         setListAdapter(new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
@@ -93,6 +97,7 @@ public class DisplayList extends ListFragment {
      * @param view
      * @param savedInstanceState
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -108,6 +113,7 @@ public class DisplayList extends ListFragment {
      * Called when fragment is connected to activity
      * @param activity
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -137,6 +143,7 @@ public class DisplayList extends ListFragment {
      * @param position
      * @param id
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
@@ -183,6 +190,7 @@ public class DisplayList extends ListFragment {
      * before being killed so that the state can be restored
      * @param outState
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -197,6 +205,7 @@ public class DisplayList extends ListFragment {
      * given the 'activated' state when touched.
      * @param activateOnItemClick
      */
+    @SuppressWarnings("JavaDoc")
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
@@ -208,6 +217,7 @@ public class DisplayList extends ListFragment {
     /**
      * @param position
      */
+    @SuppressWarnings("JavaDoc")
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);

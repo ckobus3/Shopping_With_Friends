@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 
+@SuppressWarnings("JavaDoc")
 public class WelcomeScreen extends ActionBarActivity {
 
     @Override

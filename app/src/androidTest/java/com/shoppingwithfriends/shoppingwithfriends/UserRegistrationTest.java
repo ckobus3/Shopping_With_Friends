@@ -8,6 +8,7 @@ import android.widget.EditText;
 /**
  * @author Colby McBride
  */
+@SuppressWarnings("ALL")
 public class UserRegistrationTest extends ActivityUnitTestCase<UserRegistration> {
 
     Intent launchIntent;

@@ -19,6 +19,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
+@SuppressWarnings("ALL")
 public class AddFriendFragment extends ListFragment {
 
 
@@ -41,6 +42,12 @@ public class AddFriendFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    public void onCreate(List<User> friendList, List<String> nameList) {
+        for (User user : friendList) {
+            nameList.add(user.getName());
+        }
+    }
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -71,15 +78,18 @@ public class AddFriendFragment extends ListFragment {
         List<User> list = db.getAllUsers();
         db.close();
 
+
         //adds users to the list if the aren't the current user and aren't already a friend
         for (User user : list) {
             if (!user.equals(User.currentUser) && !friendList.contains(user)) {
+                //noinspection unchecked
                 nameList.add(user.getName());
             } else
                 userList.remove(user); //removes the irrelevant user
         }
 
         //sets the adapter to the new list of names
+        //noinspection unchecked
         mAdapter = new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,

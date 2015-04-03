@@ -74,6 +74,7 @@ public class ItemListFragment extends ListFragment {
      * display list for items of the user
      * @param savedInstanceState
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,14 +85,22 @@ public class ItemListFragment extends ListFragment {
         List itemNameList = new ArrayList();
         //create list with names of all items for the user
         for (Item item: itemList) {
+            //noinspection unchecked
             itemNameList.add(item.getName());
         }
 
+
+        //noinspection unchecked
         setListAdapter(new ArrayAdapter<Item>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 itemNameList));
+    }
+    public void addItemRequest(List<Item> itemList, List itemNameList) {
+        for (Item item : itemList) {
+            itemNameList.add(item.getName());
+        }
     }
 
     @Override
@@ -160,6 +169,7 @@ public class ItemListFragment extends ListFragment {
      * @param id
 
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
@@ -190,6 +200,7 @@ public class ItemListFragment extends ListFragment {
         // fragment is attached to one) that an item has been selected.
         //mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

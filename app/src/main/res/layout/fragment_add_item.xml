@@ -11,7 +11,8 @@ tools:context="com.shoppingwithfriends.shoppingwithfriends.AddItemFragment">
     android:layout_height="wrap_content"
     android:textColor="#FFFFFF"
     android:textSize="75px"
-    android:id="@+id/textView" />
+    android:id="@+id/textView"
+    tools:ignore="HardcodedText" />
 
 <EditText
     android:layout_width="wrap_content"
@@ -25,7 +26,8 @@ tools:context="com.shoppingwithfriends.shoppingwithfriends.AddItemFragment">
     android:layout_marginTop="59dp"
     android:hint="The item name"
     android:textColorHint="#fff0ff"
-    android:width="@dimen/dialog_fixed_width_major" />
+    android:width="@dimen/dialog_fixed_width_major"
+    tools:ignore="HardcodedText" />
 
 <EditText
     android:layout_width="wrap_content"
@@ -38,7 +40,8 @@ tools:context="com.shoppingwithfriends.shoppingwithfriends.AddItemFragment">
     android:layout_alignParentStart="true"
     android:hint="Maximum price you are willing to pay"
     android:textColorHint="#fff0ff"
-    android:width="@dimen/dialog_fixed_width_major" />
+    android:width="@dimen/dialog_fixed_width_major"
+    tools:ignore="HardcodedText" />
 
 <EditText
     android:layout_width="wrap_content"
@@ -51,7 +54,8 @@ tools:context="com.shoppingwithfriends.shoppingwithfriends.AddItemFragment">
     android:layout_alignParentStart="true"
     android:hint="Where you could pick up the item"
     android:textColorHint="#fff0ff"
-    android:width="@dimen/dialog_fixed_width_major" />
+    android:width="@dimen/dialog_fixed_width_major"
+    tools:ignore="HardcodedText" />
 
 <Button
     android:layout_width="wrap_content"
@@ -67,7 +71,8 @@ tools:context="com.shoppingwithfriends.shoppingwithfriends.AddItemFragment">
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignParentEnd="true"
+    tools:ignore="SpUsage" />
 
 <Button
     android:layout_width="wrap_content"

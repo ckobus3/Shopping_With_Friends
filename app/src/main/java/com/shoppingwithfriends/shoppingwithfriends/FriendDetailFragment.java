@@ -11,6 +11,7 @@ import android.widget.TextView;
 /**
  * A fragment representing a single Friend detail screen.
  */
+@SuppressWarnings("JavaDoc")
 public class FriendDetailFragment extends Fragment {
 
     public static User user;

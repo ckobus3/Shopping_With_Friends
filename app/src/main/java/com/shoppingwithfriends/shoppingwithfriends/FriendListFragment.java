@@ -21,6 +21,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
+@SuppressWarnings("ALL")
 public class FriendListFragment extends ListFragment {
 
     /**
@@ -72,10 +73,12 @@ public class FriendListFragment extends ListFragment {
         List nameList = new ArrayList();
         //adds all friends of a user to a list
         for (User user : friendList) {
+            //noinspection unchecked
             nameList.add(user.getName());
         }
 
         //creates an adapter holding the friends of the user to be displayed
+        //noinspection unchecked
         setListAdapter(new ArrayAdapter<User>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,

@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+@SuppressWarnings("JavaDoc")
 public class UserRegistration extends Activity {
 
-    private Button button;
     private EditText nameText;
     private EditText unText;
     private EditText passText;
@@ -23,7 +23,7 @@ public class UserRegistration extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
-        button = (Button)findViewById(R.id.button);
+        Button button = (Button)findViewById(R.id.button);
         nameText = (EditText)findViewById(R.id.editText);
         unText = (EditText)findViewById(R.id.editText2);
         passText = (EditText)findViewById(R.id.editText3);

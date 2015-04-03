@@ -7,6 +7,7 @@ android {
     defaultConfig {
         applicationId "com.shoppingwithfriends.shoppingwithfriends"
         minSdkVersion 15
+        //noinspection OldTargetApi,OldTargetApi
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -21,7 +22,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleDependency,GradleDependency,GradleDependency,GradleDependency,GradleDependency,GradleDependency,GradleDependency,GradleDependency,GradleDependency
     compile 'com.android.support:appcompat-v7:21.0.3'
+    //noinspection GradleDependency,GradleDependency
     compile 'com.google.android.gms:play-services:6.5.87'
+    //noinspection GradleDependency,GradleDependency
     compile 'com.android.support:support-v4:21.0.3'
 }
