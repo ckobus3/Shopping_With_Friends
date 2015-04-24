@@ -20,14 +20,13 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editText"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="59dp"
         android:hint="Item name"
         android:textColorHint="#fff0ff"
         android:width="@dimen/dialog_fixed_width_major"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,6 +52,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="Location"
+        android:textColorHint="#fff0ff"
+        android:width="@dimen/dialog_fixed_width_major"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText5"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Expiration Date (YYYYMMDD)"
         android:textColorHint="#fff0ff"
         android:width="@dimen/dialog_fixed_width_major"
         tools:ignore="HardcodedText" />

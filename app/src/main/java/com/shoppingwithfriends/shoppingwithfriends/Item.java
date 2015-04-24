@@ -8,16 +8,18 @@ public class Item {
     private String name;
     private int price;
     private String location;
+    private int expiration; //YYYYMMDD
 
     public Item() {
     }
     // this takes in the User, name, price and location of the item
     // and add it to the item list
-    public Item(User user, String name, int price, String location) {
+    public Item(User user, String name, int price, String location, int exp) {
         this.poster = user;
         this.name = name;
         this.price = price;
         this.location = location;
+        this.expiration = exp;
     }
 
     public int getPostId() {
@@ -58,6 +60,14 @@ public class Item {
 
     public void setLocation(String loc) {
         this.location = loc;
+    }
+
+    public int getExpiration() {
+        return expiration;
+    } // return location of the item
+
+    public void setExpiration(int exp) {
+        this.expiration = exp;
     }
 
 

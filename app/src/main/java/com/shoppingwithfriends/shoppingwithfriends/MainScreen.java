@@ -193,7 +193,7 @@ public class MainScreen extends ActionBarActivity
         } else {
 
             Item item = new Item(User.currentUser, name,
-                    Integer.parseInt(price), location);
+                    Integer.parseInt(price), location, 999999);
             db.addItemRequest(item);
 
             db.close();
@@ -237,23 +237,29 @@ public class MainScreen extends ActionBarActivity
         EditText nameText = (EditText) findViewById(R.id.editText);
         EditText priceText = (EditText) findViewById(R.id.editText2);
         EditText locText = (EditText) findViewById(R.id.editText4);
+        EditText expText = (EditText) findViewById(R.id.editText5);
 
         DatabaseHandler db = new DatabaseHandler(this);
         String name = nameText.getText().toString();
         String price = priceText.getText().toString();
         String location = locText.getText().toString();
+        String exp = expText.getText().toString();
         EditText mNameView = (EditText) findViewById(R.id.editText);
         EditText mPriceView = (EditText) findViewById(R.id.editText2);
+        EditText mExpView = (EditText) findViewById(R.id.editText5);
         if (name.equals("") || price.equals("")) {
             mNameView.setError("Name and price must be completed");
             mNameView.requestFocus();
         } else if (!isNumber(price)) {
             mPriceView.setError("Price must be an integer");
             mPriceView.requestFocus();
+        } else if (!isNumber(exp)) {
+            mExpView.setError("Price must be integer in format of YYYYMMDD");
+            mExpView.requestFocus();
         } else {
 
             Item item = new Item(User.currentUser, name,
-                    Integer.parseInt(price), location);
+                    Integer.parseInt(price), location, Integer.parseInt(exp));
             db.addItemFoundPost(item);
 
             db.close();
