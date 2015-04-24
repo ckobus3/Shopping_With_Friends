@@ -69,4 +69,17 @@
         android:layout_centerHorizontal="true"
         tools:ignore="ContentDescription" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in to Google Plus"
+        android:onClick="gPlusSignIn"
+        android:background="@drawable/mybutton"
+        android:textColor="#1E90FF"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:id="@+id/button4"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

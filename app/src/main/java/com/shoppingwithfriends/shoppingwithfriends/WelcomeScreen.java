@@ -2,12 +2,35 @@ package com.shoppingwithfriends.shoppingwithfriends;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 
 @SuppressWarnings("JavaDoc")
-public class WelcomeScreen extends ActionBarActivity {
+public class WelcomeScreen extends PlusBaseActivity {
+
+    @Override
+    protected void onPlusClientRevokeAccess() {
+
+    }
+
+    @Override
+    protected void onPlusClientSignIn() {
+    }
+
+    @Override
+    protected void onPlusClientSignOut() {
+
+    }
+
+    @Override
+    protected void onPlusClientBlockingUI(boolean show) {
+
+    }
+
+    @Override
+    protected void updateConnectButtonState() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +56,14 @@ public class WelcomeScreen extends ActionBarActivity {
         startActivity(intent);
     }
 
-    
+    public void gPlusSignIn(View view) {
+        signIn();
+        signOut();
+    }
+
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
 }
